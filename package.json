@@ -1,0 +1,17 @@
+{
+  "name": "mobilewright-e2e-showcase",
+  "version": "1.0.0",
+  "description": "Sample Mobilewright test framework against Sauce Labs My Demo App (Android)",
+  "private": true,
+  "scripts": {
+    "test": "mobilewright test",
+    "test:report": "mobilewright test --reporter html",
+    "show-report": "mobilewright show-report",
+    "devices": "mobilewright devices",
+    "inspect": "mobilewright inspect"
+  },
+  "dependencies": {
+    "mobilewright": "latest",
+    "@mobilewright/test": "latest"
+  }
+}

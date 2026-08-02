@@ -1,0 +1,8 @@
+node_modules/
+apks/
+*.apk
+*.ipa
+test-results/
+playwright-report/
+.mobilewright/
+.DS_Store

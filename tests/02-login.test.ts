@@ -1,6 +1,6 @@
 import { test, expect } from './fixtures';
 
-test.only('user can log in with valid standard credentials', async ({ device, bundleId, menuPage, loginPage, catalogPage }) => {
+test('user can log in with valid standard credentials', async ({ device, bundleId, menuPage, loginPage, catalogPage }) => {
   await device.terminateApp(bundleId!).catch(() => {});
   await device.launchApp(bundleId!);
 

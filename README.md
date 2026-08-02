@@ -1,7 +1,7 @@
 # mobilewright-e2e-showcase
 
 Sample Mobilewright test framework targeting the Sauce Labs "My Demo App" (Android, React Native build)
-already installed on your emulator (`com.saucelabs.mydemoapp.rn`).
+already installed on your emulator.
 
 ## Structure
 
@@ -66,7 +66,7 @@ npm run show-report
 
 ## Native Android app vs React Native app
 
-The test files in this repo were originally written against `com.saucelabs.mydemoapp.rn`
+The test files in this repo were originally written against `com.saucelabs.mydemoapp.android`
 (the React Native build). If you use `fetch-apk.sh` to pull the **native Android** build
 instead, its package name is different — find the actual one after installing:
 
@@ -80,8 +80,7 @@ often expose different accessibility labels for the same-looking screen).
 
 ## Important: verify locators first
 
-The exact accessibility labels used in the test files (`'Open menu'`, `'Username input field'`,
-`'Cart badge'`, etc.) are based on the app's typical structure but **may not match your exact
+The exact accessibility labels used in the test files are based on the app's typical structure but **may not match your exact
 build/version exactly**. Before trusting these tests, open the Inspector against your booted
 emulator and confirm the real locators:
 

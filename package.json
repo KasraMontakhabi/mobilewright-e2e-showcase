@@ -11,7 +11,11 @@
     "inspect": "mobilewright inspect"
   },
   "dependencies": {
+    "@mobilewright/test": "latest",
     "mobilewright": "latest",
-    "@mobilewright/test": "latest"
+    "yaml": "^2.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.2"
   }
 }

@@ -1,4 +1,5 @@
 import { test, expect } from '@mobilewright/test';
+import { find } from './locators';
 
 test('app launches and shows the product catalog screen', async ({ device, screen, bundleId }) => {
   // Fresh-launch to avoid state bleeding from a previous run
@@ -6,10 +7,10 @@ test('app launches and shows the product catalog screen', async ({ device, scree
   await device.launchApp(bundleId!);
 
   // The catalog screen title / a known product should be visible on cold launch
-  await expect(screen.getByText('Products')).toBeVisible();
-  await expect(screen.getByText('Sauce Labs Backpack')).toBeVisible();
-  await expect(screen.getByLabel('Shows current sorting order and displays available sorting options')).toBeVisible();
-  await expect(screen.getByLabel('View cart')).toBeVisible();
-  await expect(screen.getByLabel('View menu')).toBeVisible();
+  await expect(find(screen, 'catalog', 'productsTitle')).toBeVisible();
+  await expect(find(screen, 'catalog', 'backpack')).toBeVisible();
+  await expect(find(screen, 'catalog', 'sortButton')).toBeVisible();
+  await expect(find(screen, 'catalog', 'viewCart')).toBeVisible();
+  await expect(find(screen, 'menu', 'viewMenu')).toBeVisible();
 });
 

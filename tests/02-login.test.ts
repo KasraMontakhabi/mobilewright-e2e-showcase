@@ -1,15 +1,16 @@
 import { test, expect } from '@mobilewright/test';
+import { find } from './locators';
 
 test('user can log in with valid standard credentials', async ({ device, screen, bundleId }) => {
   await device.terminateApp(bundleId!).catch(() => {});
   await device.launchApp(bundleId!);
 
-  await screen.getByLabel('View menu').tap();
-  await screen.getByText('Log In').tap();
+  await find(screen, 'menu', 'viewMenu').tap();
+  await find(screen, 'menu', 'logIn').tap();
 
-  await screen.getByRole('textfield').nth(0).fill('standard_user');
-  await screen.getByRole('textfield').nth(1).fill('secret_sauce');
-  await screen.getByRole('button', { name: 'Tap to login with given credentials' }).tap();
+  await find(screen, 'login', 'usernameField').fill('standard_user');
+  await find(screen, 'login', 'passwordField').fill('secret_sauce');
+  await find(screen, 'login', 'loginButton').tap();
 
-  await expect(screen.getByText('Products')).toBeVisible();
+  await expect(find(screen, 'catalog', 'productsTitle')).toBeVisible();
 });

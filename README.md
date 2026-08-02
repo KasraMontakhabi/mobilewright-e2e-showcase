@@ -8,8 +8,10 @@ already installed on your emulator.
 ```
 mobilewright-e2e-showcase/
 ├── mobilewright.config.ts     # platform, bundleId, device target
+├── locators.yaml               # every screen locator, grouped by screen
 ├── package.json
 └── tests/
+    ├── locators.ts             # loads locators.yaml and resolves entries against `screen`
     ├── 01-app-launch.test.ts   # catalog screen + nav sanity checks
     ├── 02-login.test.ts        # valid + invalid login flows
     └── 03-add-to-cart.test.ts  # add-to-cart + cart contents
@@ -74,23 +76,33 @@ instead, its package name is different — find the actual one after installing:
 adb shell pm list packages | grep saucelabs
 ```
 
-Update `bundleId` in `mobilewright.config.ts` and in each `test.use({ bundleId: ... })` block
-to match, then re-verify every locator with the Inspector (native Espresso views and RN views
-often expose different accessibility labels for the same-looking screen).
+Update `bundleId` in `mobilewright.config.ts` to match, then re-verify every locator with the
+Inspector (native Espresso views and RN views often expose different accessibility labels for
+the same-looking screen).
+
+## Locators
+
+Every element locator used by the tests lives in [`locators.yaml`](locators.yaml), grouped by
+screen (`menu`, `login`, `catalog`, `cart`). Test files never hardcode a label/text/testId/role —
+they call `find(screen, '<screen>', '<name>')` (from [`tests/locators.ts`](tests/locators.ts)),
+which looks up the entry and resolves it against `screen.getByLabel` / `getByText` / `getByTestId`
+/ `getByRole` as appropriate. `testId` entries may contain a `{bundleId}` placeholder, substituted
+at runtime when you pass `bundleId` as `find`'s 4th argument; an optional `index` picks the nth
+match for screens with no unique locator.
 
 ## Important: verify locators first
 
-The exact accessibility labels used in the test files are based on the app's typical structure but **may not match your exact
-build/version exactly**. Before trusting these tests, open the Inspector against your booted
-emulator and confirm the real locators:
+The values in `locators.yaml` are based on the app's typical structure but **may not match your
+exact build/version exactly**. Before trusting these tests, open the Inspector against your
+booted emulator and confirm the real locators:
 
 ```bash
 npx mobilewright inspect
 ```
 
 This opens a browser UI showing a live screenshot of the app next to every visible element and
-its best-matching locator. Adjust the `getByLabel` / `getByText` / `getByRole` calls in the test
-files to match what you see there.
+its best-matching locator. Update the entries in `locators.yaml` (not the test files) to match
+what you see there.
 
 ## Next step: adding the MCP server
 

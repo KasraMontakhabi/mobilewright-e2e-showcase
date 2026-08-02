@@ -1,0 +1,45 @@
+# Centralized element locators for the My Demo App screens, grouped by screen.
+#
+# Loaded by tests/locators.ts and used across every test file — no test file
+# should hardcode a label/text/testId/role directly. After verifying the real
+# values with `npx mobilewright inspect`, update them here instead of in the
+# test files. `{bundleId}` is substituted with the app's bundleId at runtime.
+# `index` (optional) selects the nth match, for screens with no unique label.
+
+menu:
+  viewMenu:
+    label: "View menu"
+  logIn:
+    text: "Log In"
+
+login:
+  usernameField:
+    role: textfield
+    index: 0
+  passwordField:
+    role: textfield
+    index: 1
+  loginButton:
+    role: button
+    name: "Tap to login with given credentials"
+
+catalog:
+  productsTitle:
+    text: "Products"
+  backpack:
+    text: "Sauce Labs Backpack"
+  sortButton:
+    label: "Shows current sorting order and displays available sorting options"
+  viewCart:
+    label: "View cart"
+  productImage:
+    role: image
+    name: "Product Image"
+    index: 0
+  addToCartButton:
+    role: button
+    name: "Tap to add product to cart"
+
+cart:
+  cartBadge:
+    testId: "{bundleId}:id/cartTV"

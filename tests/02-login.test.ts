@@ -1,16 +1,13 @@
-import { test, expect } from '@mobilewright/test';
-import { find } from './locators';
+import { test, expect } from './fixtures';
 
-test('user can log in with valid standard credentials', async ({ device, screen, bundleId }) => {
+test.only('user can log in with valid standard credentials', async ({ device, bundleId, menuPage, loginPage, catalogPage }) => {
   await device.terminateApp(bundleId!).catch(() => {});
   await device.launchApp(bundleId!);
 
-  await find(screen, 'menu', 'viewMenu').tap();
-  await find(screen, 'menu', 'logIn').tap();
+  await menuPage.open();
+  await menuPage.goToLogin();
 
-  await find(screen, 'login', 'usernameField').fill('standard_user');
-  await find(screen, 'login', 'passwordField').fill('secret_sauce');
-  await find(screen, 'login', 'loginButton').tap();
+  await loginPage.login('standard_user', 'secret_sauce');
 
-  await expect(find(screen, 'catalog', 'productsTitle')).toBeVisible();
+  await expect(catalogPage.productsTitle).toBeVisible();
 });
